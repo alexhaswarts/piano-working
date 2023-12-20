@@ -7,11 +7,11 @@ def play_sound(note):
     pygame.mixer.music.load(f"piano_sounds/{note}.wav")
     pygame.mixer.music.play(0)
 
-def binds(note, key):
+def keyplays(note, key):
     app.bind(key, lambda event, n=note: play_sound(n))
 
-def binds():
-    keybinds = {
+def bindedkeys():
+    key_mapping = {
         "C": "a",
         "C#": "s",
         "D": "d",
@@ -26,8 +26,8 @@ def binds():
         "B": "Enter"
     }
 
-    for note, key in keybinds.items():
-        binds(note, key)
+    for note, key in key_mapping.items():
+        keyplays(note, key)
 
 app = tk.Tk()
 app.title("Piano")
@@ -41,7 +41,7 @@ for note in notes:
         button = tk.Button(app, text=note, width=20, height=30, bg="white", fg="black", command=lambda n=note: play_sound(n))
     button.grid(row=0, column=notes.index(note))
 
-binds()
+bindedkeys()
 
 pygame.mixer.music.set_volume(1)
 
